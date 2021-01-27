@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private SpawnManager _spawnManager;
     [SerializeField]
-    private float speedPowerUp = 15f;
+    private float speedPowerUp = 150f;
     [SerializeField]
     private float defaultSpeed = 5f;
     //[SerializeField]
@@ -28,8 +28,9 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        //_spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _UImanager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
     }
 
     // Update is called once per frame
@@ -63,7 +64,7 @@ public class PlayerMove : MonoBehaviour
     }
     public void InputButtonLeft()
     {
-            transform.eulerAngles = new Vector3(rotationX, rotationY, 90);
+           this.transform.eulerAngles = new Vector3(rotationX, rotationY, 90);
     }
     public void InputButtonDown()
     {
@@ -95,16 +96,25 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Walls")
-        {
-            _spawnManager.DelSnakeBody();
-            player_Head.active = false;
-        }
+    //    if (collision.tag == "Walls")
+    //    {
+    //        _spawnManager.DelSnakeBody();
+    //        player_Head.active = false;
+    //    }
         if (collision.tag=="Points")
         {
             //_audiosource.Play(0);
             Destroy(collision.gameObject);
             _UImanager.UpdateScore();
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Walls")
+        {
+            _spawnManager.DelSnakeBody();
+            player_Head.active = false;
+        }
+       
     }
 }

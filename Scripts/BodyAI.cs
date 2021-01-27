@@ -6,13 +6,14 @@ using UnityEngine.AI;
 public class BodyAI : MonoBehaviour
 {
     private int myOrder;
+    [SerializeField]
     private Transform head;
     [SerializeField]
     private float rotHeadX, rotHeadY, rotHeadZ;
     // Start is called before the first frame update
     void Start()
     {
-        head = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
+        //head = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
         for(int i=0;i<head.GetComponent<PlayerMove>().bodyParts.Count;i++)
         {
             if (gameObject==head.GetComponent<PlayerMove>().bodyParts[i].gameObject)

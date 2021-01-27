@@ -46,8 +46,8 @@ public class SpawnManager : MonoBehaviour
             _UImanager.checkScoreBody = 4;
             _UImanager.score = 0;
             partsBodySnake = 0;
-            _UImanager.scoreText.text = "Score : " + _UImanager.score;
-            player_Head.transform.position = new Vector3(5.45f, 17.2f, -0.546875f);
+            _UImanager.scoreText.text = "Score: " + _UImanager.score;
+            player_Head.transform.position = new Vector3(0f, 158f, -0.546875f);
             player_Head.SetActive(true);
         }
     }
@@ -79,13 +79,15 @@ public class SpawnManager : MonoBehaviour
     {
         while(gameOver==false)
         {
-            Instantiate(points, new Vector3(Random.RandomRange(-21.0f, 70.0f), Random.RandomRange(50.0f,0f), 0), Quaternion.identity);
+            Instantiate(points, new Vector3(Random.RandomRange(-448f, 483f), Random.RandomRange(412f, -80f), 0), Quaternion.identity);
             yield return new WaitForSeconds(3.0f);
         }
         
     }
     public void AddSnakeBody()
     {
+        if (partsBodySnake >= 25)
+            return;
         bodyPartsObject[partsBodySnake].transform.position = new Vector3(playerHead.transform.position.x, playerHead.transform.position.y, playerHead.transform.position.z);
         bodyPartsObject[partsBodySnake].SetActive(true);
         partsBodySnake++;
